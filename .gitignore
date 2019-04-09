@@ -50,6 +50,9 @@ cmake-build-*/
 out/
 .idea/
 OCD-EP1.iml
+config
+description
+HEAD
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
