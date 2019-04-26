@@ -157,6 +157,7 @@ public class Operands {
         return bin;
     }
 
+
     public static boolean[] execute(boolean[] valor1, boolean[] valor2, String operacao){
         boolean[] result;
         switch (operacao){
