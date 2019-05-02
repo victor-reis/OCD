@@ -509,14 +509,14 @@ public class Report
         
         //Testes de mantissa
         //fazer para cada um
-        //floatA = new BinFloat( 0, 1, 0b01); //23bits
+        //loatA = new BinFloat( 0, 1, 0b10); //23bits
         //floatB = new BinFloat( 0, 1, 0b01); //23bits
         //floatA = new BinFloat( 0, 1, 0b10000000000000000000000); //23bits
         //floatB = new BinFloat( 0, 1, 0b10000000000000000000000); //23bits
-        //floatA = new BinFloat( 0, 1, 0b11000000000000000000000); //23bits
-        //floatB = new BinFloat( 0, 1, 0b01000000000000000000000); //23bits
-        floatA = new BinFloat( 0, 1, 0b01000000000000000000000); //23bits
-        floatB = new BinFloat( 0, 1, 0b11000000000000000000000); //23bits
+        floatA = new BinFloat( 0, 1, 0b11010100000000000000000); //23bits
+        floatB = new BinFloat( 0, 1, 0b10011000000000000000000); //23bits
+        //floatA = new BinFloat( 0, 1, 0b01000000000000000000000); //23bits
+        //floatB = new BinFloat( 0, 1, 0b11000000000000000000000); //23bits
         
         Log(floatA.ToBinScientific());
         Log(floatB.ToBinScientific());
@@ -540,13 +540,13 @@ public class Report
         //Float de resultado de divisao
         BinFloat floatR = null;    	
         
-        floatA = new BinFloat( 0, 2, 1);
-        floatB = new BinFloat( 0, -5, 1);
+        floatA = new BinFloat( 0, 127, 2);
+        floatB = new BinFloat( 0, 127, 5);
         Log(floatA.ToBinScientific());
         Log(floatB.ToBinScientific());
         try 
         {
-            floatR = Alu.SumFloat(floatA, floatB, false);
+            floatR = Alu.SumFloat(floatA, floatB, true);
         } 
         catch (Exception e) 
         {

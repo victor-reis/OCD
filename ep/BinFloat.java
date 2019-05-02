@@ -11,13 +11,10 @@ public class BinFloat
     
     BinFloat(int sign, int exp, int significand)
     {
-        //O bit adicional serve para facilitar a soma com os 
-        //metodos em complemento de dois para representar o excesso de 127 (IEEE 754) com bit de sinal
-    	//NAO MAIS
+        //binario normal unsigned
         mantissa = new BinInt(significand, mantissa_size);
         
-        //mesma coisa
-        //NAO MAIS
+        //excesso de 128, i.e pertence a [-127, 128]
         this.exponent = new BinInt(exp + excess, exponent_size);
 
         if(sign > 0)
@@ -33,6 +30,7 @@ public class BinFloat
         sign = sig;
     }
     
+    //Transforma em string
     String ToString()
     {   
         boolean[] significand = this.mantissa.bits;
@@ -68,7 +66,7 @@ public class BinFloat
         return s;
     }
     
-
+    //Transforma em string na forma cientifica
     String ToBinScientific()
     {
         boolean[] significand = this.mantissa.bits;  
@@ -108,18 +106,7 @@ public class BinFloat
         return s;
     }
     
-    String ToScientific()
-    {
-        String s = "";
-        
-        if(sign)
-            s = "-" + s;
-        else
-            s += "+" + s;        
-            
-        return s;
-    }
-    
+    //Se o numero tem valor zero na representacao
     boolean isZero()
     {
     	if(isMantissaZero() && isExponentZero())
@@ -128,6 +115,7 @@ public class BinFloat
     	return false;
     }
     
+    //Se o valor da mantissa e zero
     boolean isMantissaZero()
     {
         for(int i = 0; i < mantissa.length; i++)
@@ -139,6 +127,7 @@ public class BinFloat
         return true;
     }
     
+    //Se o valor do expoente na MEMORIA e zero
     boolean isExponentZero()
     {
         for(int i = 0; i < exponent.length; i++)

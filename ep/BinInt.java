@@ -4,6 +4,7 @@ public class BinInt
     int length;
     boolean[] bits;
     
+    //Construtor padrao
     BinInt(int decimal, int num_bits)
     {
         boolean negative = (decimal < 0);
@@ -26,6 +27,7 @@ public class BinInt
         length = bits.length;
     }
     
+    //Transforma um binario em inteiro decimal e com n bits
     static boolean[] DecToBin(int dec, int num_bits)
     {
         boolean[] bin = new boolean[num_bits];
@@ -44,6 +46,7 @@ public class BinInt
         return bin;
     }
     
+    //Mesmo que acima
     static int BinToDec(boolean[] bin)
     {
         int dec = 0;
@@ -57,6 +60,7 @@ public class BinInt
         return dec;
     }
     
+    //Retorna o valor decimal do binario
     int ToDec()
     {
         if(!bits[bits.length - 1])
@@ -65,6 +69,7 @@ public class BinInt
         return -BinToDec(Alu.TwoComplement(this).bits);
     }
     
+    //Retorna uma representacao de string do binario
     String ToString()
     {
         String s = "";
