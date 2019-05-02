@@ -49,7 +49,7 @@ public class Report
             }
         }
         
-        Log("Testando range de soma de inteiros. IntA + i : i = [-127, 127]");
+        Log("Testando range de soma de inteiros. IntA + i : i = [-128, 127]");
         
         //127
         int numA = 0b01111111;

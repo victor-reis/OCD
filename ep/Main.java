@@ -1,9 +1,9 @@
 /*
- * EP desenvolvido pelos alunos Lucas Moura de Carvalho (9862905) e Victor Reis.
+ * EP desenvolvido pelos alunos Lucas Moura de Carvalho e Victor Reis.
  * https://en.wikipedia.org/wiki/Booth%27s_multiplication_algorithm
  * javac *.java
  * java Main
- * jar cfe EP.jar myClass myClass.class 
+ * jar cfe EP.jar Main Main.class 
  */
  
 import java.util.Scanner;
@@ -116,6 +116,9 @@ public class Main
                     throw new Exception("Operacao invalida. So podem +, -, * ou /, nao " + op + ".");                
             }
             
+            if(Alu.overflow)
+                Report.Log("OVERFLOW DETECTADO!");
+                
             Report.Log(" Resultado: " + intA.ToString() + " " + op + " " + intB.ToString() + " = " + intR.ToString());
         }
         else if(type.equals("float"))
@@ -133,7 +136,7 @@ public class Main
                 else
                     throw new Exception("Sinal invalido. So podem + ou -, nao " + sign + ".");
                     
-                Report.Log("Entre o valor do expoente em binario. (9 bits incluindo zeros a esquerda) (o bit mais a esquerda e o bit de sinal: 0 = positivo 1 = negativo, para facilitar) (entre -127 e 128)");
+                Report.Log("Entre o valor do expoente " + i + " em binario. (9 bits incluindo zeros a esquerda) (o bit mais a esquerda e o bit de sinal: 0 = positivo 1 = negativo, para facilitar) (entre -127 e 128)");
                 exponent = main.read();
                 
                 int exp;
@@ -153,7 +156,7 @@ public class Main
                 if(exp < -127 || exp > 128)
                     throw new Exception(exp + " esta fora do range [-127, 128].");
                     
-                Report.Log("Entre o valor da mantissa em binario, considerando que o primeiro bit ja esta implicito como 1. (23 bits).");
+                Report.Log("Entre o valor da mantissa " + i + " em binario, considerando que o primeiro bit ja esta implicito como 1. (23 bits).");
                 mantissa = "0" + main.read();
                 boolean[] mant = StringToBin(mantissa);
                 
@@ -163,41 +166,43 @@ public class Main
                     floatB = new BinFloat(float_sign, new BinInt(exp, 8).ToDec(),  new BinInt(mant).ToDec());
             }
             
+            Report.Log("Qual operacao? Digite:\n + para soma. \n - para subtracao. \n * para multiplicacao. \n / para divisao.");
             op = main.readChar();
-            switch (op)
-            {
-                case '+':
-                    floatR = Alu.SumFloat(floatA, floatA, false);
-                break;
-                case '-':
-                    floatR = Alu.SubFloat(floatA, floatA);
-                break;
-                case '*':
-                    floatR = Alu.MultFloat(floatA, floatA);
-                break;
-                case '/':
-                    floatR = Alu.DivFloat(floatA, floatA);
-                break;
-                default:
-                    throw new Exception("Operacao invalida. So podem +, -, * ou /, nao " + op + ".");                
-            }
             
-            Report.Log(" Resultado: " + floatA.ToString() + "\n" + op + "\n" + floatB.ToString() + " = " + floatR.ToString());
-            Report.Log(" Resultado: " + floatA.ToBinScientific() + " " + op + " " + floatB.ToBinScientific() + " = " + floatR.ToBinScientific());
+            try
+            {
+                switch (op)
+                {
+                    case '+':
+                        floatR = Alu.SumFloat(floatA, floatA, false);
+                    break;
+                    case '-':
+                        floatR = Alu.SubFloat(floatA, floatA);
+                    break;
+                    case '*':
+                        floatR = Alu.MultFloat(floatA, floatA);
+                    break;
+                    case '/':
+                        floatR = Alu.DivFloat(floatA, floatA);
+                    break;
+                    default:
+                        throw new Exception("Operacao invalida. So podem +, -, * ou /, nao " + op + ".");                
+                }
+                
+                Report.Log(" Resultado: " + floatA.ToString() + "\n" + op + "\n" + floatB.ToString() + " = " + floatR.ToString());
+                Report.Log(" Resultado: " + floatA.ToBinScientific() + " " + op + " " + floatB.ToBinScientific() + " = " + floatR.ToBinScientific());
+            }
+            catch(Exception ex)
+            {
+                Report.Log(ex.getMessage());
+            }
         }
         
-        /*
-        Report.TestSum();
-        Report.TestSub();
-        Report.TestDiv();
-        Report.TestMul();
-        */
         
         //Report.TestSum();
         //Report.TestSub();
         //Report.TestDiv();
-        //Report.TestMult();
-            	
+        //Report.TestMult();        	
         //Report.TestFloatMult();
         //Report.TestFloatDiv(); ERR
         //Report.TestFloatSum();
